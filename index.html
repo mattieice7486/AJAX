@@ -12,15 +12,24 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col sm-12">
-                <button data-subject="cat">meow</button>
-                <button data-subject="dog">woof</button>
-                <button data-subject="bird">chirp</button>
+            <div class="col sm-12" id="button-div">
+                <button animal-type="cat" class="btn btn-primary">cat</button>
+                <button animal-type="dog" class="btn btn-primary">dog</button>
+                <button animal-type="bird" class="btn btn-primary">bird</button>
             </div>
         </div>
-        <div class="row">
-            <div id="gifs"></div>
+    <br>
+    <div class="row">
+        <div class="col sm-4">
+            <form>
+            <span id="subject-item">Type an animal here <input id="subject" type="text"><input id="add-subject" value="Add Item" type="submit"></span>
+            </form>
         </div>
+    </div>
+    
+    <div class="row">
+        <div id="gifs"></div>
+    </div>
     </div>
     <script src="assets/javascript/app.js"></script>
 </body>
