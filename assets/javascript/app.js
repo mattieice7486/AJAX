@@ -9,7 +9,6 @@ $(document.body).on("click", ".btn", function() {
       }).then(function(response) {
         var results = response.data;
         console.log(queryURL);
-
         console.log(response);
         for (var i = 0; i < results.length; i++) {
 
@@ -26,24 +25,27 @@ $(document.body).on("click", ".btn", function() {
           subjectDiv.append(p);
           subjectDiv.append(subjectImage);
           subjectDiv.append(stillImage);
-          console.log(subjectImage);
-          console.log(stillImage);
           $("#gifs").prepend(subjectDiv);
           $(document.body).on("click", ".animate", function() {
-            // $(this).css(".animate {display: none}");
-            // $(this).html(subjectImage);
-            $(this).html(stillImage);
+            var state = $(this).attr("class");
+            if (state === "still") {
+              $(this).attr("src", $(this).attr(results[i].images.fixed_height.url));
+              $(this).attr("class", "animate");
+            } else {
+              $(this).attr("src", $(this).attr(results[i].images.fixed_height_still.url));
+              $(this).attr("class", "still");
+            }
+            console.log(subjectImage);
+            console.log(stillImage);
+            
           });
-          $(document.body).on("click", ".still", function() {
-          //   $(this).css(".animate {display:block}");
-            $(this).html(subjectImage);
-          });
+         
         };
       });
       
 });    
       $("#add-subject").on("click", function(event) {
-        if ($("#subject").val() == "") {} else {
+        if ($("#subject").val() == "") {return false} else {
         event.preventDefault();
         var subjectTask = $("#subject").val().trim();
         var newButton = $("<button>");

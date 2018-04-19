@@ -8,9 +8,13 @@ body {
 }
 
 .still {
-    display: block;
+    display: none;
 }
 
 .animate {
     display: block;
+}
+
+#button-div {
+    margin-top: 25px;
 }
