@@ -16,19 +16,34 @@ $(document.body).on("click", ".btn", function() {
           var subjectDiv = $("<div>");
 
           var p = $("<p>").text("Rating: " + results[i].rating);
-
+          
           var subjectImage = $("<img>");
           subjectImage.attr("src", results[i].images.fixed_height.url);
-
+          subjectImage.addClass("animate");
+          var stillImage = $("<img>");
+          stillImage.attr("src", results[i].images.fixed_height_still.url);
+          stillImage.addClass("still");
           subjectDiv.append(p);
           subjectDiv.append(subjectImage);
-
+          subjectDiv.append(stillImage);
+          console.log(subjectImage);
+          console.log(stillImage);
           $("#gifs").prepend(subjectDiv);
+          $(document.body).on("click", ".animate", function() {
+            // $(this).css(".animate {display: none}");
+            // $(this).html(subjectImage);
+            $(this).html(stillImage);
+          });
+          $(document.body).on("click", ".still", function() {
+          //   $(this).css(".animate {display:block}");
+            $(this).html(subjectImage);
+          });
         };
       });
       
-});
+});    
       $("#add-subject").on("click", function(event) {
+        if ($("#subject").val() == "") {} else {
         event.preventDefault();
         var subjectTask = $("#subject").val().trim();
         var newButton = $("<button>");
@@ -40,5 +55,5 @@ $(document.body).on("click", ".btn", function() {
         $("#button-div").append(" ");
         $("#button-div").append(newButton);
         $("#subject").val("");
-
-      });
+      };
+    });
