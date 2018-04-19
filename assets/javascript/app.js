@@ -18,25 +18,23 @@ $(document.body).on("click", ".btn", function() {
           
           var subjectImage = $("<img>");
           subjectImage.attr("src", results[i].images.fixed_height.url);
+          subjectImage.attr("primary", results[i].images.fixed_height.url);
+          subjectImage.attr("alternate", results[i].images.fixed_height_still.url)
           subjectImage.addClass("animate");
-          var stillImage = $("<img>");
-          stillImage.attr("src", results[i].images.fixed_height_still.url);
-          stillImage.addClass("still");
+
           subjectDiv.append(p);
           subjectDiv.append(subjectImage);
-          subjectDiv.append(stillImage);
           $("#gifs").prepend(subjectDiv);
-          $(document.body).on("click", ".animate", function() {
+          $(document.body).on("click", "img", function() {
             var state = $(this).attr("class");
             if (state === "still") {
-              $(this).attr("src", $(this).attr(results[i].images.fixed_height.url));
+              $(this).attr("src", $(this).attr("primary"));
               $(this).attr("class", "animate");
             } else {
-              $(this).attr("src", $(this).attr(results[i].images.fixed_height_still.url));
+              $(this).attr("src", $(this).attr("alternate"));
               $(this).attr("class", "still");
             }
             console.log(subjectImage);
-            console.log(stillImage);
             
           });
          
@@ -45,7 +43,9 @@ $(document.body).on("click", ".btn", function() {
       
 });    
       $("#add-subject").on("click", function(event) {
-        if ($("#subject").val() == "") {return false} else {
+        if ($("#subject").val() == "") {
+          return false
+        } else {
         event.preventDefault();
         var subjectTask = $("#subject").val().trim();
         var newButton = $("<button>");
