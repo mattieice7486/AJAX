@@ -1,4 +1,4 @@
-$(document.body).on("click", ".btn", function() {
+$(document.body).on("click", ".btn-primary", function() {
     
   var subject = $(this).attr("animal-type");
   var queryURL = "https://api.giphy.com/v1/gifs/search?q=" + subject + "&api_key=dc6zaTOxFJmzC&limit=10";
@@ -12,7 +12,7 @@ $(document.body).on("click", ".btn", function() {
       console.log(response);
       for (var i = 0; i < results.length; i++) {
 
-        var subjectDiv = $("<div>");
+        var subjectDiv = $("<div class='new'>");
 
         var p = $("<p>").text("Rating: " + results[i].rating);
         
@@ -21,31 +21,33 @@ $(document.body).on("click", ".btn", function() {
         subjectImage.attr("primary", results[i].images.fixed_height.url);
         subjectImage.attr("alternate", results[i].images.fixed_height_still.url);
         subjectImage.attr("data-state", "animate");
-        subjectImage.addClass("animate");
 
-        subjectDiv.append(p);
         subjectDiv.append(subjectImage);
+        subjectDiv.append(p);
         $("#gifs").prepend(subjectDiv);
       };
-      $(document.body).on("click", "img", function() {
-        var state = $(this).attr("data-state");
-        if (state == "animate") {
-          $(this).attr("src", $(this).attr("alternate"));
-          $(this).attr("data-state", "still");
-        } else {
-          $(this).attr("src", $(this).attr("primary"));
-          $(this).attr("data-state", "animate");
-        }
-        console.log(subjectImage);
-        console.log(this);
-        
-      });
-    });     
-});    
+    });
+});
+
+$(".btn-secondary").on("click", function() {
+  $("#gifs").html("");
+});
+
+$(document.body).on("click", "img", function() {
+  var state = $(this).attr("data-state");
+  if (state == "animate") {
+    $(this).attr("src", $(this).attr("alternate"));
+    $(this).attr("data-state", "still");
+  } else {
+    $(this).attr("src", $(this).attr("primary"));
+    $(this).attr("data-state", "animate");
+  }
+});
+
 $("#add-subject").on("click", function(event) {
-    if ($("#subject").val() == "") {
-      return false
-    } else {
+  if ($("#subject").val() == "") {
+    return false
+  } else {
     event.preventDefault();
     var subjectTask = $("#subject").val().trim();
     var newButton = $("<button>");
@@ -58,4 +60,4 @@ $("#add-subject").on("click", function(event) {
     $("#button-div").append(newButton);
     $("#subject").val("");
   };
-});
+});     

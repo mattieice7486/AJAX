@@ -14,3 +14,16 @@ body {
 #button-div {
     margin-top: 25px;
 }
+
+#gifs {
+    margin-top: 25px;
+}
+
+.new {
+    float: left;
+    padding-right: 10px;
+}
+
+.btn {
+    margin-top: 5px;
+}
